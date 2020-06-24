@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>org.example</groupId>
+    <artifactId>home</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.influxdb</groupId>
+            <artifactId>influxdb-java</artifactId>
+            <version>2.18</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>0.9.10</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>build</goal></goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <from>
+                        <image>hypriot/rpi-java</image>
+                    </from>
+                    <to>
+                        <image>192.168.1.54:5000/home-application:latest</image>
+                    </to>
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                    <container>
+
+<!--                        <entrypoint>/bin/sh, -c, java -cp /app/resources/:/app/classes/:/app/libs/* -Xmx1G -Dspring.profiles.active=pi   fr.janvier.home.HomeApplication</entrypoint>-->
+                        <jvmFlags>
+                            <jvmFlag>-Xmx1G</jvmFlag>
+                            <jvmFlag>-Dspring.profiles.active=pi</jvmFlag>
+                        </jvmFlags>
+                        <ports><port>8080</port></ports>
+                    </container>
+                </configuration>
+            </plugin>
+
+
+        </plugins>
+    </build>
+
+</project>

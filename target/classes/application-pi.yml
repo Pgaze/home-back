@@ -1,0 +1,14 @@
+influx:
+  user: spring
+  password: spring
+  url : http://influx-db:8086
+  database: home
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto=update
+  datasource:
+    url: jdbc:mysql://mysql-db:3306/home
+    username: spring
+    password: spring
